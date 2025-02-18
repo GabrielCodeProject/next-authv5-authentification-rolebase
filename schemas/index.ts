@@ -1,5 +1,5 @@
 import * as z from "zod";
-
+debugger;
 export const RegisterSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address",

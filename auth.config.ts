@@ -14,7 +14,10 @@ export default {
     }),
     Credentials({
       async authorize(credentials) {
+        debugger;
+        console.log(credentials);
         const validatedData = LoginSchema.safeParse(credentials);
+        console.log(validatedData);
         if (!validatedData.success) {
           return null;
         }
@@ -30,14 +33,17 @@ export default {
           return null;
         }
 
-        const passwordMatch = await bcrypt.compare(password, userExists.password);
+        const passwordMatch = await bcrypt.compare(
+          password,
+          userExists.password
+        );
 
         if (passwordMatch) {
           return userExists;
         }
 
         return null;
-      }
+      },
     }),
   ],
 } satisfies NextAuthConfig;
