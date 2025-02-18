@@ -4,3 +4,5 @@ import React from "react";
 export const RegisterPage = () => {
   return <RegisterForm />;
 };
+
+export default RegisterPage;

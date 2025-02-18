@@ -13,3 +13,5 @@ export const FormError = ({ message }: FormSuccessProps) => {
     </div>
   );
 };
+
+export default FormError;
