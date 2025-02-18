@@ -15,9 +15,9 @@ export default {
     Credentials({
       async authorize(credentials) {
         debugger;
-        console.log(credentials);
+        console.log("credential receive in authorize function: ", credentials);
         const validatedData = LoginSchema.safeParse(credentials);
-        console.log(validatedData);
+        console.log("validated data:", validatedData);
         if (!validatedData.success) {
           return null;
         }
@@ -29,20 +29,19 @@ export default {
           },
         });
 
+        console.log("auth user fetch", userExists);
         if (!userExists || !userExists.password || !userExists.email) {
           return null;
         }
 
-        const passwordMatch = await bcrypt.compare(
-          password,
-          userExists.password
-        );
+        await bcrypt.compare(password, userExists.password).then((res) => {
+          console.log("Comparison result:", res);
+          if (!res) {
+            return null;
+          }
+        });
 
-        if (passwordMatch) {
-          return userExists;
-        }
-
-        return null;
+        return userExists;
       },
     }),
   ],
